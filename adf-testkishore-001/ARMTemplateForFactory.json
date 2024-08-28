@@ -33,7 +33,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_stage_dump_tables')]",
+			"name": "[concat(parameters('factoryName'), '/pl_stage_dump_into_table')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -151,7 +151,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -178,7 +178,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -205,7 +205,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -232,7 +232,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -259,7 +259,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -286,7 +286,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -313,7 +313,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_stage_dump_tables",
+								"referenceName": "pl_stage_dump_into_table",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -350,7 +350,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_stage_dump_tables')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_stage_dump_into_table')]"
 			]
 		},
 		{
