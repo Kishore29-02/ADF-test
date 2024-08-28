@@ -281,6 +281,415 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/df_perp_change_datatype_employee')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Q1"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "EmployeeTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "UserTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "SurveyTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "FormQuestionTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "FormOptionTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "FormInstanceTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "SurveyStatusTable"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepSchemaEmployee"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepUserTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepSurveyTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepFormQuestionTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepFormOptionTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepFormInstanceTable"
+						},
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_table",
+								"type": "DatasetReference"
+							},
+							"name": "PrepSurveyStatusTable"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          id as integer,",
+						"          name as string,",
+						"          DOB as string,",
+						"          gender as string,",
+						"          phone_no as string,",
+						"          status as string,",
+						"          designation_id as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> EmployeeTable",
+						"source(output(",
+						"          emp_id as integer,",
+						"          email as string,",
+						"          password as string,",
+						"          role as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> UserTable",
+						"source(output(",
+						"          id as integer,",
+						"          title as string,",
+						"          status as string,",
+						"          target_role_id as integer,",
+						"          creator_id as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> SurveyTable",
+						"source(output(",
+						"          id as integer,",
+						"          question_type as string,",
+						"          survey_id as integer,",
+						"          value as string,",
+						"          qn_no as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> FormQuestionTable",
+						"source(output(",
+						"          id as integer,",
+						"          qn_id as integer,",
+						"          value as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> FormOptionTable",
+						"source(output(",
+						"          id as integer,",
+						"          survey_id as integer,",
+						"          qn_id as integer,",
+						"          value as string,",
+						"          emp_id as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> FormInstanceTable",
+						"source(output(",
+						"          survey_id as integer,",
+						"          emp_id as integer,",
+						"          status as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> SurveyStatusTable",
+						"EmployeeTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepSchemaEmployee",
+						"UserTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepUserTable",
+						"SurveyTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepSurveyTable",
+						"FormQuestionTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormQuestionTable",
+						"FormOptionTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormOptionTable",
+						"FormInstanceTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormInstanceTable",
+						"SurveyStatusTable sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> PrepSurveyStatusTable"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_sqldb_table')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_prep_master')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df_perp_change_datatype_employee",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EmployeeTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "employees"
+									},
+									"UserTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "users"
+									},
+									"SurveyTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "surveys"
+									},
+									"FormQuestionTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "form_questions"
+									},
+									"FormOptionTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "form_options"
+									},
+									"FormInstanceTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "form_instances"
+									},
+									"SurveyStatusTable": {
+										"schema_name": {
+											"value": "@pipeline().parameters.source_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "survey_status"
+									},
+									"PrepSchemaEmployee": {
+										"schema_name": {
+											"value": "@pipeline().parameters.target_schema_name",
+											"type": "Expression"
+										},
+										"table_name": "employees"
+									},
+									"PrepUserTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "users"
+									},
+									"PrepSurveyTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "surveys"
+									},
+									"PrepFormQuestionTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "form_questions"
+									},
+									"PrepFormOptionTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "form_options"
+									},
+									"PrepFormInstanceTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "form_instances"
+									},
+									"PrepSurveyStatusTable": {
+										"schema_name": "@pipeline().parameters.target_schema_name",
+										"table_name": "survey_status"
+									}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"source_schema_name": {
+						"type": "string",
+						"defaultValue": "staging"
+					},
+					"target_schema_name": {
+						"type": "string",
+						"defaultValue": "prep"
+					}
+				},
+				"folder": {
+					"name": "Q1/Preparation"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df_perp_change_datatype_employee')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_stage_master')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
