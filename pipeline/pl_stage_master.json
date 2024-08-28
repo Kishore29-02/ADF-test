@@ -1,0 +1,210 @@
+{
+	"name": "pl_stage_master",
+	"properties": {
+		"activities": [
+			{
+				"name": "Dump employees",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "employees",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump users",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "users",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump surveys",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "surveys",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump survey status",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "survey_status",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump Form Questions",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "form_questions",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump Form Options",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "form_options",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Dump Form Instance",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_stage_dump_tables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"table_name": "form_instances",
+						"sheet_name": {
+							"value": "@pipeline().parameters.sheet_name",
+							"type": "Expression"
+						},
+						"schema_name": {
+							"value": "@pipeline().parameters.schema_name",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"schema_name": {
+				"type": "string",
+				"defaultValue": "staging"
+			},
+			"sheet_name": {
+				"type": "string",
+				"defaultValue": "Sheet1"
+			}
+		},
+		"folder": {
+			"name": "Q1/Staging"
+		},
+		"annotations": []
+	}
+}
