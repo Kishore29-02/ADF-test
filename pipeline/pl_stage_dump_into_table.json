@@ -1,5 +1,5 @@
 {
-	"name": "pl_stage_dump_tables",
+	"name": "pl_stage_dump_into_table",
 	"properties": {
 		"activities": [
 			{
