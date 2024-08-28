@@ -1,0 +1,267 @@
+{
+	"name": "df_perp_change_datatype_employee",
+	"properties": {
+		"folder": {
+			"name": "Q1"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "EmployeeTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "UserTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "SurveyTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "FormQuestionTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "FormOptionTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "FormInstanceTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "SurveyStatusTable"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepSchemaEmployee"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepUserTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepSurveyTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepFormQuestionTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepFormOptionTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepFormInstanceTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_table",
+						"type": "DatasetReference"
+					},
+					"name": "PrepSurveyStatusTable"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          DOB as string,",
+				"          gender as string,",
+				"          phone_no as string,",
+				"          status as string,",
+				"          designation_id as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> EmployeeTable",
+				"source(output(",
+				"          emp_id as integer,",
+				"          email as string,",
+				"          password as string,",
+				"          role as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> UserTable",
+				"source(output(",
+				"          id as integer,",
+				"          title as string,",
+				"          status as string,",
+				"          target_role_id as integer,",
+				"          creator_id as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SurveyTable",
+				"source(output(",
+				"          id as integer,",
+				"          question_type as string,",
+				"          survey_id as integer,",
+				"          value as string,",
+				"          qn_no as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> FormQuestionTable",
+				"source(output(",
+				"          id as integer,",
+				"          qn_id as integer,",
+				"          value as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> FormOptionTable",
+				"source(output(",
+				"          id as integer,",
+				"          survey_id as integer,",
+				"          qn_id as integer,",
+				"          value as string,",
+				"          emp_id as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> FormInstanceTable",
+				"source(output(",
+				"          survey_id as integer,",
+				"          emp_id as integer,",
+				"          status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SurveyStatusTable",
+				"EmployeeTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepSchemaEmployee",
+				"UserTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepUserTable",
+				"SurveyTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepSurveyTable",
+				"FormQuestionTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormQuestionTable",
+				"FormOptionTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormOptionTable",
+				"FormInstanceTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepFormInstanceTable",
+				"SurveyStatusTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> PrepSurveyStatusTable"
+			]
+		}
+	}
+}

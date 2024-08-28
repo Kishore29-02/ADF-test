@@ -1,0 +1,127 @@
+{
+	"name": "pl_prep_master",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_perp_change_datatype_employee",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"EmployeeTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "employees"
+							},
+							"UserTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "users"
+							},
+							"SurveyTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "surveys"
+							},
+							"FormQuestionTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "form_questions"
+							},
+							"FormOptionTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "form_options"
+							},
+							"FormInstanceTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "form_instances"
+							},
+							"SurveyStatusTable": {
+								"schema_name": {
+									"value": "@pipeline().parameters.source_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "survey_status"
+							},
+							"PrepSchemaEmployee": {
+								"schema_name": {
+									"value": "@pipeline().parameters.target_schema_name",
+									"type": "Expression"
+								},
+								"table_name": "employees"
+							},
+							"PrepUserTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "users"
+							},
+							"PrepSurveyTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "surveys"
+							},
+							"PrepFormQuestionTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "form_questions"
+							},
+							"PrepFormOptionTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "form_options"
+							},
+							"PrepFormInstanceTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "form_instances"
+							},
+							"PrepSurveyStatusTable": {
+								"schema_name": "@pipeline().parameters.target_schema_name",
+								"table_name": "survey_status"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"source_schema_name": {
+				"type": "string",
+				"defaultValue": "staging"
+			},
+			"target_schema_name": {
+				"type": "string",
+				"defaultValue": "prep"
+			}
+		},
+		"folder": {
+			"name": "Q1/Preparation"
+		},
+		"annotations": []
+	}
+}
