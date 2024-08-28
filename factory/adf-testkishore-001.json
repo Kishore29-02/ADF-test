@@ -1,0 +1,9 @@
+{
+	"name": "adf-testkishore-001",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7cd27590-a679-4ea9-896f-683b2b66df95",
+		"tenantId": "2800c0a0-70e9-49be-8733-faeaa6aced99"
+	}
+}
