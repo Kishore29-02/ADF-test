@@ -35,9 +35,6 @@
 				{
 					"name": "RemoveRowNumberColumn",
 					"description": " RemoveDuplicateColumn  "
-				},
-				{
-					"name": "GetParentCategoryName"
 				}
 			],
 			"scriptLines": [
@@ -72,7 +69,7 @@
 				"          pageView as string,",
 				"          comparisonSpecValueList as string,",
 				"          shaftPatternSpecValueList as string,",
-				"          categoryList as (),",
+				"          categoryList as ({} as string),",
 				"          promptDeliveryFlag as string,",
 				"          keywordClickCount as string,",
 				"          specialShipmentFlag as string,",
@@ -143,8 +140,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> RemoveRowNumberColumn",
-				"RemoveRowNumberColumn derive(parentCategory = first(fromJsonArray(categoryList)).categoryName) ~> GetParentCategoryName",
-				"GetParentCategoryName sink(allowSchemaDrift: true,",
+				"RemoveRowNumberColumn sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
