@@ -21,6 +21,9 @@
 						"datasetParameters": {
 							"StagingProducts": {
 								"environment_schema": "staging"
+							},
+							"StoreIntoPrepLayer": {
+								"environment_schema": "prep"
 							}
 						}
 					},
