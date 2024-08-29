@@ -1,0 +1,201 @@
+{
+	"name": "ds_blob_q2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Q2"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "products.xlsx",
+				"container": "q2-container"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "departmentCode",
+				"type": "String"
+			},
+			{
+				"name": "categoryCode",
+				"type": "String"
+			},
+			{
+				"name": "categoryName",
+				"type": "String"
+			},
+			{
+				"name": "searchCategoryCode",
+				"type": "String"
+			},
+			{
+				"name": "seriesCode",
+				"type": "String"
+			},
+			{
+				"name": "seriesName",
+				"type": "String"
+			},
+			{
+				"name": "brandCode",
+				"type": "String"
+			},
+			{
+				"name": "brandUrlCode",
+				"type": "String"
+			},
+			{
+				"name": "brandName",
+				"type": "String"
+			},
+			{
+				"name": "seriesStatus",
+				"type": "String"
+			},
+			{
+				"name": "productImageList",
+				"type": "String"
+			},
+			{
+				"name": "minStandardDaysToShip",
+				"type": "String"
+			},
+			{
+				"name": "maxStandardDaysToShip",
+				"type": "String"
+			},
+			{
+				"name": "directCartType",
+				"type": "String"
+			},
+			{
+				"name": "priceCheckLessFlag",
+				"type": "String"
+			},
+			{
+				"name": "recommendFlag",
+				"type": "String"
+			},
+			{
+				"name": "iconTypeList",
+				"type": "String"
+			},
+			{
+				"name": "volumeDiscountFlag",
+				"type": "String"
+			},
+			{
+				"name": "cValueFlag",
+				"type": "String"
+			},
+			{
+				"name": "stockItemFlag",
+				"type": "String"
+			},
+			{
+				"name": "displayStandardPriceFlag",
+				"type": "String"
+			},
+			{
+				"name": "discontinuedProductFlag",
+				"type": "String"
+			},
+			{
+				"name": "pictList",
+				"type": "String"
+			},
+			{
+				"name": "cadTypeList",
+				"type": "String"
+			},
+			{
+				"name": "misumiFlag",
+				"type": "String"
+			},
+			{
+				"name": "packageSpecFlag",
+				"type": "String"
+			},
+			{
+				"name": "simpleFlag",
+				"type": "String"
+			},
+			{
+				"name": "pageView",
+				"type": "String"
+			},
+			{
+				"name": "comparisonSpecValueList",
+				"type": "String"
+			},
+			{
+				"name": "shaftPatternSpecValueList",
+				"type": "String"
+			},
+			{
+				"name": "categoryList",
+				"type": "String"
+			},
+			{
+				"name": "promptDeliveryFlag",
+				"type": "String"
+			},
+			{
+				"name": "keywordClickCount",
+				"type": "String"
+			},
+			{
+				"name": "specialShipmentFlag",
+				"type": "String"
+			},
+			{
+				"name": "catchCopy",
+				"type": "String"
+			},
+			{
+				"name": "minStandardUnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "maxStandardUnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "minPricePerPiece",
+				"type": "String"
+			},
+			{
+				"name": "maxPricePerPiece",
+				"type": "String"
+			},
+			{
+				"name": "minPiecesPerPackage",
+				"type": "String"
+			},
+			{
+				"name": "maxPiecesPerPackage",
+				"type": "String"
+			},
+			{
+				"name": "gradeType",
+				"type": "String"
+			},
+			{
+				"name": "gradeTypeDisp",
+				"type": "String"
+			},
+			{
+				"name": "campaignEndDate",
+				"type": "String"
+			}
+		]
+	}
+}

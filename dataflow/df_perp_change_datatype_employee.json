@@ -9,49 +9,49 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "EmployeeTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "UserTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "SurveyTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "FormQuestionTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "FormOptionTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "FormInstanceTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "SurveyStatusTable"
@@ -60,49 +60,49 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepSchemaEmployee"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepUserTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepSurveyTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepFormQuestionTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepFormOptionTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepFormInstanceTable"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sqldb_table",
+						"referenceName": "ds_sqldb_q1",
 						"type": "DatasetReference"
 					},
 					"name": "PrepSurveyStatusTable"

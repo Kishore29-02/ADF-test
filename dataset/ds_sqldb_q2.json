@@ -1,33 +1,27 @@
 {
-	"name": "ds_sqldb_q1",
+	"name": "ds_sqldb_q2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sqldb",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"schema_name": {
-				"type": "string"
-			},
-			"table_name": {
+			"environment_schema": {
 				"type": "string"
 			}
 		},
 		"folder": {
-			"name": "Q1"
+			"name": "Q2"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().schema_name",
+				"value": "@dataset().environment_schema",
 				"type": "Expression"
 			},
-			"table": {
-				"value": "@dataset().table_name",
-				"type": "Expression"
-			}
+			"table": "product"
 		}
 	}
 }

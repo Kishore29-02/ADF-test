@@ -1,0 +1,161 @@
+{
+	"name": "df_prep_clean_data",
+	"properties": {
+		"folder": {
+			"name": "Q2"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_q2",
+						"type": "DatasetReference"
+					},
+					"name": "StagingProducts"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sqldb_q2",
+						"type": "DatasetReference"
+					},
+					"name": "StoreIntoPrepLayer"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RowCount",
+					"description": "Adding column to find the row count"
+				},
+				{
+					"name": "RemoveDuplicateColumn"
+				},
+				{
+					"name": "RemoveRowNumberColumn",
+					"description": " RemoveDuplicateColumn  "
+				},
+				{
+					"name": "GetParentCategoryName"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          departmentCode as string,",
+				"          categoryCode as string,",
+				"          categoryName as string,",
+				"          searchCategoryCode as string,",
+				"          seriesCode as string,",
+				"          seriesName as string,",
+				"          brandCode as string,",
+				"          brandUrlCode as string,",
+				"          brandName as string,",
+				"          seriesStatus as string,",
+				"          productImageList as string,",
+				"          minStandardDaysToShip as string,",
+				"          maxStandardDaysToShip as string,",
+				"          directCartType as string,",
+				"          priceCheckLessFlag as string,",
+				"          recommendFlag as string,",
+				"          iconTypeList as string,",
+				"          volumeDiscountFlag as string,",
+				"          cValueFlag as string,",
+				"          stockItemFlag as string,",
+				"          displayStandardPriceFlag as string,",
+				"          discontinuedProductFlag as string,",
+				"          pictList as string,",
+				"          cadTypeList as string,",
+				"          misumiFlag as string,",
+				"          packageSpecFlag as string,",
+				"          simpleFlag as string,",
+				"          pageView as string,",
+				"          comparisonSpecValueList as string,",
+				"          shaftPatternSpecValueList as string,",
+				"          categoryList as (),",
+				"          promptDeliveryFlag as string,",
+				"          keywordClickCount as string,",
+				"          specialShipmentFlag as string,",
+				"          catchCopy as string,",
+				"          minStandardUnitPrice as string,",
+				"          maxStandardUnitPrice as string,",
+				"          minPricePerPiece as string,",
+				"          maxPricePerPiece as string,",
+				"          minPiecesPerPackage as string,",
+				"          maxPiecesPerPackage as string,",
+				"          gradeType as string,",
+				"          gradeTypeDisp as string,",
+				"          campaignEndDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> StagingProducts",
+				"StagingProducts window(over(seriesCode),",
+				"     desc(seriesCode, true),",
+				"     row_count = rowNumber()) ~> RowCount",
+				"RowCount filter(row_count == 1) ~> RemoveDuplicateColumn",
+				"RemoveDuplicateColumn select(mapColumn(",
+				"          departmentCode,",
+				"          categoryCode,",
+				"          categoryName,",
+				"          searchCategoryCode,",
+				"          seriesCode,",
+				"          seriesName,",
+				"          brandCode,",
+				"          brandUrlCode,",
+				"          brandName,",
+				"          seriesStatus,",
+				"          productImageList,",
+				"          minStandardDaysToShip,",
+				"          maxStandardDaysToShip,",
+				"          directCartType,",
+				"          priceCheckLessFlag,",
+				"          recommendFlag,",
+				"          iconTypeList,",
+				"          volumeDiscountFlag,",
+				"          cValueFlag,",
+				"          stockItemFlag,",
+				"          displayStandardPriceFlag,",
+				"          discontinuedProductFlag,",
+				"          pictList,",
+				"          cadTypeList,",
+				"          misumiFlag,",
+				"          packageSpecFlag,",
+				"          simpleFlag,",
+				"          pageView,",
+				"          comparisonSpecValueList,",
+				"          shaftPatternSpecValueList,",
+				"          categoryList,",
+				"          promptDeliveryFlag,",
+				"          keywordClickCount,",
+				"          specialShipmentFlag,",
+				"          catchCopy,",
+				"          minStandardUnitPrice,",
+				"          maxStandardUnitPrice,",
+				"          minPricePerPiece,",
+				"          maxPricePerPiece,",
+				"          minPiecesPerPackage,",
+				"          maxPiecesPerPackage,",
+				"          gradeType,",
+				"          gradeTypeDisp,",
+				"          campaignEndDate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RemoveRowNumberColumn",
+				"RemoveRowNumberColumn derive(parentCategory = first(fromJsonArray(categoryList)).categoryName) ~> GetParentCategoryName",
+				"GetParentCategoryName sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> StoreIntoPrepLayer"
+			]
+		}
+	}
+}

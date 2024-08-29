@@ -1,9 +1,9 @@
 {
-	"name": "pl_stage_dump_into_table",
+	"name": "pl_stage_master_2",
 	"properties": {
 		"activities": [
 			{
-				"name": "Dump Employee details",
+				"name": "Dump the products into database",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -42,52 +42,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_blob_q1",
-						"type": "DatasetReference",
-						"parameters": {
-							"file_name": {
-								"value": "@concat(pipeline().parameters.table_name, '.xlsx')\r\n",
-								"type": "Expression"
-							},
-							"sheet_name": {
-								"value": "@pipeline().parameters.sheet_name",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "ds_blob_q2",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sqldb_q1",
+						"referenceName": "ds_sqldb_q2",
 						"type": "DatasetReference",
 						"parameters": {
-							"schema_name": {
-								"value": "@pipeline().parameters.schema_name",
-								"type": "Expression"
-							},
-							"table_name": {
-								"value": "@pipeline().parameters.table_name",
-								"type": "Expression"
-							}
+							"environment_schema": "temp"
 						}
 					}
 				]
 			}
 		],
-		"parameters": {
-			"table_name": {
-				"type": "string"
-			},
-			"sheet_name": {
-				"type": "string",
-				"defaultValue": "Sheet1"
-			},
-			"schema_name": {
-				"type": "string"
-			}
-		},
 		"folder": {
-			"name": "Q1/Staging"
+			"name": "Q2/Staging"
 		},
 		"annotations": []
 	}
