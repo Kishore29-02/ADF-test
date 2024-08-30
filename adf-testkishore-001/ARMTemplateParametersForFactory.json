@@ -11,6 +11,9 @@
 		"ls_sqldb_password": {
 			"value": ""
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kv-testkishore-001.vault.azure.net/"
+		},
 		"ls_sqldb_properties_typeProperties_server": {
 			"value": "sqlserver-testkishore-001.database.windows.net"
 		},

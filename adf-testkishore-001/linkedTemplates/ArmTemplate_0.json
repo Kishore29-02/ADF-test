@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_sqldb'"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-testkishore-001.vault.azure.net/"
+		},
 		"ls_sqldb_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sqlserver-testkishore-001.database.windows.net"
@@ -32,6 +36,19 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_blob')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -140,7 +157,213 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_sqldb_table')]",
+			"name": "[concat(parameters('factoryName'), '/ds_blob_q2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_blob",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Q2"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "products.xlsx",
+						"container": "q2-container"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "departmentCode",
+						"type": "String"
+					},
+					{
+						"name": "categoryCode",
+						"type": "String"
+					},
+					{
+						"name": "categoryName",
+						"type": "String"
+					},
+					{
+						"name": "searchCategoryCode",
+						"type": "String"
+					},
+					{
+						"name": "seriesCode",
+						"type": "String"
+					},
+					{
+						"name": "seriesName",
+						"type": "String"
+					},
+					{
+						"name": "brandCode",
+						"type": "String"
+					},
+					{
+						"name": "brandUrlCode",
+						"type": "String"
+					},
+					{
+						"name": "brandName",
+						"type": "String"
+					},
+					{
+						"name": "seriesStatus",
+						"type": "String"
+					},
+					{
+						"name": "productImageList",
+						"type": "String"
+					},
+					{
+						"name": "minStandardDaysToShip",
+						"type": "String"
+					},
+					{
+						"name": "maxStandardDaysToShip",
+						"type": "String"
+					},
+					{
+						"name": "directCartType",
+						"type": "String"
+					},
+					{
+						"name": "priceCheckLessFlag",
+						"type": "String"
+					},
+					{
+						"name": "recommendFlag",
+						"type": "String"
+					},
+					{
+						"name": "iconTypeList",
+						"type": "String"
+					},
+					{
+						"name": "volumeDiscountFlag",
+						"type": "String"
+					},
+					{
+						"name": "cValueFlag",
+						"type": "String"
+					},
+					{
+						"name": "stockItemFlag",
+						"type": "String"
+					},
+					{
+						"name": "displayStandardPriceFlag",
+						"type": "String"
+					},
+					{
+						"name": "discontinuedProductFlag",
+						"type": "String"
+					},
+					{
+						"name": "pictList",
+						"type": "String"
+					},
+					{
+						"name": "cadTypeList",
+						"type": "String"
+					},
+					{
+						"name": "misumiFlag",
+						"type": "String"
+					},
+					{
+						"name": "packageSpecFlag",
+						"type": "String"
+					},
+					{
+						"name": "simpleFlag",
+						"type": "String"
+					},
+					{
+						"name": "pageView",
+						"type": "String"
+					},
+					{
+						"name": "comparisonSpecValueList",
+						"type": "String"
+					},
+					{
+						"name": "shaftPatternSpecValueList",
+						"type": "String"
+					},
+					{
+						"name": "categoryList",
+						"type": "String"
+					},
+					{
+						"name": "promptDeliveryFlag",
+						"type": "String"
+					},
+					{
+						"name": "keywordClickCount",
+						"type": "String"
+					},
+					{
+						"name": "specialShipmentFlag",
+						"type": "String"
+					},
+					{
+						"name": "catchCopy",
+						"type": "String"
+					},
+					{
+						"name": "minStandardUnitPrice",
+						"type": "String"
+					},
+					{
+						"name": "maxStandardUnitPrice",
+						"type": "String"
+					},
+					{
+						"name": "minPricePerPiece",
+						"type": "String"
+					},
+					{
+						"name": "maxPricePerPiece",
+						"type": "String"
+					},
+					{
+						"name": "minPiecesPerPackage",
+						"type": "String"
+					},
+					{
+						"name": "maxPiecesPerPackage",
+						"type": "String"
+					},
+					{
+						"name": "gradeType",
+						"type": "String"
+					},
+					{
+						"name": "gradeTypeDisp",
+						"type": "String"
+					},
+					{
+						"name": "campaignEndDate",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_blob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sqldb_q1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -171,6 +394,38 @@
 						"value": "@dataset().table_name",
 						"type": "Expression"
 					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_sqldb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sqldb_q2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_sqldb",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"environment_schema": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Q2"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().environment_schema",
+						"type": "Expression"
+					},
+					"table": "product"
 				}
 			},
 			"dependsOn": [
@@ -239,7 +494,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference",
 								"parameters": {
 									"schema_name": {
@@ -277,7 +532,82 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_blob_q1')]",
-				"[concat(variables('factoryId'), '/datasets/ds_sqldb_table')]"
+				"[concat(variables('factoryId'), '/datasets/ds_sqldb_q1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_stage_master_2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Dump the products into database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_blob_q2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sqldb_q2",
+								"type": "DatasetReference",
+								"parameters": {
+									"environment_schema": "temp"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Q2/Staging"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_blob_q2')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sqldb_q2')]"
 			]
 		},
 		{
@@ -293,49 +623,49 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "EmployeeTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "UserTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "SurveyTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "FormQuestionTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "FormOptionTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "FormInstanceTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "SurveyStatusTable"
@@ -344,49 +674,49 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepSchemaEmployee"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepUserTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepSurveyTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepFormQuestionTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepFormOptionTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepFormInstanceTable"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_sqldb_table",
+								"referenceName": "ds_sqldb_q1",
 								"type": "DatasetReference"
 							},
 							"name": "PrepSurveyStatusTable"
@@ -549,7 +879,118 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_sqldb_table')]"
+				"[concat(variables('factoryId'), '/datasets/ds_sqldb_q1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/df_prep_clean_data')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Q2"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_q2",
+								"type": "DatasetReference"
+							},
+							"name": "StagingProducts"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ds_sqldb_q2",
+								"type": "DatasetReference"
+							},
+							"name": "StoreIntoPrepLayer"
+						}
+					],
+					"transformations": [
+						{
+							"name": "RowCount",
+							"description": "Adding column to find the row count"
+						},
+						{
+							"name": "FilterUniqueRows"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          departmentCode as string,",
+						"          categoryCode as string,",
+						"          categoryName as string,",
+						"          searchCategoryCode as string,",
+						"          seriesCode as string,",
+						"          seriesName as string,",
+						"          brandCode as string,",
+						"          brandUrlCode as string,",
+						"          brandName as string,",
+						"          seriesStatus as string,",
+						"          productImageList as string,",
+						"          minStandardDaysToShip as string,",
+						"          maxStandardDaysToShip as string,",
+						"          directCartType as string,",
+						"          priceCheckLessFlag as string,",
+						"          recommendFlag as string,",
+						"          iconTypeList as string,",
+						"          volumeDiscountFlag as string,",
+						"          cValueFlag as string,",
+						"          stockItemFlag as string,",
+						"          displayStandardPriceFlag as string,",
+						"          discontinuedProductFlag as string,",
+						"          pictList as string,",
+						"          cadTypeList as string,",
+						"          misumiFlag as string,",
+						"          packageSpecFlag as string,",
+						"          simpleFlag as string,",
+						"          pageView as string,",
+						"          comparisonSpecValueList as string,",
+						"          shaftPatternSpecValueList as string,",
+						"          categoryList as string,",
+						"          promptDeliveryFlag as string,",
+						"          keywordClickCount as string,",
+						"          specialShipmentFlag as string,",
+						"          catchCopy as string,",
+						"          minStandardUnitPrice as string,",
+						"          maxStandardUnitPrice as string,",
+						"          minPricePerPiece as string,",
+						"          maxPricePerPiece as string,",
+						"          minPiecesPerPackage as string,",
+						"          maxPiecesPerPackage as string,",
+						"          gradeType as string,",
+						"          gradeTypeDisp as string,",
+						"          campaignEndDate as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> StagingProducts",
+						"StagingProducts window(over(seriesCode),",
+						"     desc(seriesCode, true),",
+						"     row_count = rowNumber()) ~> RowCount",
+						"RowCount filter(row_count == 1) ~> FilterUniqueRows",
+						"FilterUniqueRows sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 1,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> StoreIntoPrepLayer"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_sqldb_q2')]"
 			]
 		},
 		{
@@ -687,6 +1128,59 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/df_perp_change_datatype_employee')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_prep_master_2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "TransformData",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df_prep_clean_data",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"StagingProducts": {
+										"environment_schema": "staging"
+									},
+									"StoreIntoPrepLayer": {
+										"environment_schema": "prep"
+									}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Q2/Preparation"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df_prep_clean_data')]"
 			]
 		},
 		{
@@ -972,6 +1466,67 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_stage_master')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_prep_master')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_master_2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Staging pipeline",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_stage_master_2",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Prep pipeline",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Staging pipeline",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_prep_master_2",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Q2"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_stage_master_2')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_prep_master_2')]"
 			]
 		}
 	]
